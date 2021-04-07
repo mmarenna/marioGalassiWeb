@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+<header th:replace="layout/layout :: header"></header>
+
+<br><br>
+
+<div class="container" th:if="${username != 'Vivas'}" >
+
+    <h2 class="text-center">Crear una Oferta</h2>
+    <br>
+
+    <form action="#" th:action="@{/guardaroferta}"
+          th:object="${oferta}" method="post" id="formComentario">
+
+        <div class="row">
+            <div class="col">
+                <label>Categoria</label> <input type="text"
+                                             class="form-control" th:field="*{categoria}"/>
+            </div>
+            <div class="col">
+                <label>Linea</label> <input type="text"
+                                               th:field="*{linea}" class="form-control"/>
+            </div>
+            <div class="col">
+                <label>Porcentaje</label> <input type="text"
+                                              th:field="*{porcentaje}" class="form-control"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Fecha</label>
+            <input type="text" placeholder="Ej: 01 Febrero 2019 - 15 Marzo 2019"
+                   th:field="*{fecha}" class="form-control"/>
+        </div>
+
+        <div class="card-body text-center">
+            <div>
+                <input type="submit" th:value="Guardar"
+                       class="btn btn-warning" />
+            </div>
+        </div>
+    </form>
+</div>
+<hr/>
+<div class="container-fluid text-center">
+    <h5 class="text-center text-secondary " th:if="${!listaofertas.empty}">
+        <i class="fas fa-list-ul"></i> <u>Listado de las ofertas:</u>
+    </h5>
+    <br><br>
+    <div  th:if="${!listaofertas.empty}">
+        <div class="container">
+            <table class="table  table-responsive ">
+
+                <thead class="thead-light">
+                <tr class="text-center">
+                    <th>#</th>
+                    <th>Categoria</th>
+                    <th>Linea</th>
+                    <th>Porcentaje de descuento</th>
+                    <th>Fecha de vigencia</th>
+                    <th th:if="${username != 'Vivas'}" class="text-center">Eliminar</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="text-center" th:each="reg, registro: ${listaofertas} " >
+                    <td th:text="${reg.id}"></td>
+                    <td th:text="${reg.categoria}"></td>
+                    <td th:text="${reg.linea}"></td>
+                    <td th:text="${reg.porcentaje}"></td>
+                    <td th:text="${reg.fecha}"></td>
+                    <td th:if="${username != 'Vivas'}"><a class="btn-lg btn-outline-danger " title="Eliminar Mensaje" th:href="@{/eliminaOferta/} + ${reg.id}" onclick="return confirm('Estas seguro que quieres eliminar la oferta?');"><i class="fas fa-trash"></i></a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+</div>
+
+<footer th:replace="layout/layoutpublic :: footer"></footer>
+</body>
+</html>

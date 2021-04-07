@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="layout/layout :: head"></head>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+	<div class="card-body">
+		<a th:href="@{/comments/comvendedor/} + ${listado[0].nroVendedor}" class="btn btn-secondary btn-sm"
+			title="Listado de comentarioss.."><i class="fas fa-comments"></i> Listado de comentarios..</a>
+	</div> 
+<div class="container-fluid text-center">
+
+	
+	<h5 class="text-center text-secondary " th:if="${!listado.empty}">
+		<i class="fas fa-list-ul"></i> <u>Listado detallado del vendedor:</u><span class="font-weight-bold"
+			th:text="'    ' + ${listado[0].vendedor}"></span>
+	</h5>
+	<!-- <p><u><strong>Referencias</strong></u>   : ~<span class="text-success">A mas de 10 dias del vencimiento.</span> ~<span class="text-primary">A menos de 10 dias del vencimiento.</span>
+	~<span class="text-info">Se vencio hace mas de 10 dias.</span>~<span class="text-warning">Se vencio hace mas de 30 dias.</span>~<span class="text-danger">Se vencio hace mas de 60 dias.</span> 
+	</p>-->
+	<div  th:if="${!listado.empty}">
+		<table class="table table-bordered table-responsive table-sm animated fadeIn fast"
+			style="width: 100%">
+			<thead class="thead-light">
+				<tr class="text-center">
+					<th>Localidad</th>
+					<th>Nombre de Cliente</th>
+					<th>Nombre empresa</th>
+					<th>Fecha factura</th>
+					<th>Factura</th>
+					<th>T.C.</th>
+
+					<th>Importe Factura</th>
+					<th>Importe aplicado</th>
+				 	<th>Saldo Factura</th> 
+					<th>Saldo Cliente</th>
+
+					<th class="text-center">Comentario</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class="text-center" th:each="reg, registro: ${listado} " >
+					<!-- <td th:text="${reg.estadoFactura}"></td> -->
+					
+					<td class="font-weight-bold texr"
+						th:text="${registro.index == 0 || listado[registro.index].localidad != listado[registro.index - 1].localidad} ? ${reg.localidad} : '---'"></td>
+					<td class="font-weight-bold "
+						th:text="${registro.index == 0 || listado[registro.index].clienteNombre != listado[registro.index - 1].clienteNombre} ? ${reg.clienteNombre} : '---'"></td>
+					<td class="font-weight-bold text-success text-center"
+						th:text="${registro.index == 0 || listado[registro.index].nombreEmpresa != listado[registro.index - 1].nombreEmpresa || listado[registro.index].clienteNombre != listado[registro.index - 1].clienteNombre } ? ${reg.nombreEmpresa} : '---'"></td>
+	
+			<!--  EL COLOR DE LA FECHA FACTURA ESTA DADO POR EL ATRIBUTO "ESTADOFACTURA" -->
+
+					<td th:text="${#dates.format(reg.fechaFactura, 'dd-MMM-yyyy')}"></td>
+					
+					<td th:text="${reg.factura}"></td>
+					<td th:text="${reg.tipoComprobante}"></td>
+	
+					<td class="text-right">$ <span th:text="${#numbers.formatDecimal(reg.impFactura, 0, 'POINT', 2, 'COMMA')}"></span></td>
+					
+					<td class="text-right">$ <span th:text="${#numbers.formatDecimal(reg.impAplicado, 0, 'POINT', 2, 'COMMA')}"></span></td>
+					
+					
+					<td class="text-right">$ <span th:text="${#numbers.formatDecimal(reg.saldo, 0, 'POINT', 2, 'COMMA')}"></span></td>
+	
+					<td class="bg-dark text-success text-right" th:text="${registro.index == 0 || listado[registro.index].localidad != listado[registro.index - 1].localidad || 
+					registro.index == 0 || listado[registro.index].clienteNombre != listado[registro.index - 1].clienteNombre ||
+					registro.index == 0 || listado[registro.index].nombreEmpresa != listado[registro.index - 1].nombreEmpresa} ? ${#numbers.formatDecimal(reg.saldoUnificado, 0, 'POINT', 2, 'COMMA')} : '---'"></td>
+
+					<td><div class="btn-group">
+							 <a th:if="${reg.comentario}" class="btn btn-secondary btn-sm float-left " th:href="@{/comments/comentarioformven/} + ${reg.id_registros}"
+								><i class="fas fa-plus-circle"></i> / <i class="fas fa-list-ul"></i></a>
+								<a th:if=" ${!reg.comentario}" class="btn btn-outline-secondary float-left btn-sm" th:href="@{/comments/comentarioformven/} + ${reg.id_registros}"
+								><i class="fas fa-plus-circle"></i> / <i class="fas fa-list-ul"></i></a> 
+								<!-- <a class="btn btn-outline-info  btn-xs" th:text="'Coments.'"></a> -->
+						</div></td>
+				</tr>
+			</tbody>
+		</table>
+
+	</div>
+</div>
+
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+<header th:replace="layout/layoutpublic :: header"></header>
+<div class="card-body text-left" >
+    <a  title="Volver.." th:href="@{/inicio}"><button class=" btn btn-danger btn-sm"><i class="fas fa-arrow-circle-left"></i> Volver..</button></a>
+</div>
+<br>
+<p>Aca quienes</p>
+<footer th:replace="layout/layoutpublic :: footer"></footer>
+</body>
+</html>

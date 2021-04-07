@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+<header th:replace="layout/layoutpublic :: header"></header>
+<div class="container">
+<div class="alert alert-success" th:if="${success != null}"
+     th:text="${success}"></div>
+<div class="alert alert-danger" th:if="${error != null}"
+     th:text="${error}"></div>
+<div class="alert alert-warning" th:if="${warning != null}"
+     th:text="${warning}"></div>
+<div class="alert alert-info" th:if="${info != null}"
+     th:text="${info}"></div>
+</div>
+<br>
+<div class=" text-center">
+    <img th:src="@{oficial.png}" class="img-fluid" style="height: 400px; width: 1150px; " alt="Responsive image">
+</div>
+<br>
+<!--Carousel Wrapper-->
+<div id="carousel-with-lb" class="carousel slide carousel-multi-item" data-ride="carousel">
+
+    <!--Slides and lightbox-->
+    <div class="carousel-inner mdb-lightbox" role="listbox">
+        <div id="mdb-lightbox-ui"></div>
+        <!--First slide-->
+        <div class=" carousel-item active text-center">
+
+            <figure class="col-md-3 d-md-inline-block">
+                    <img th:src="@{unilever.jpeg}" class="img-fluid " style="height: 150px; width: 150px; " alt="Responsive image">
+            </figure>
+            <figure class="col-md-3 d-md-inline-block">
+                    <img th:src="@{308.jpeg}" class="img-fluid " style="height: 150px; width: 150px; " alt="Responsive image">
+            </figure>
+            <figure class="col-md-3 d-md-inline-block">
+                    <img th:src="@{knorr.jpeg}" class="img-fluid " style="height: 150px; width: 150px; " alt="Responsive image">
+            </figure>
+        </div>
+        <!--/.First slide-->
+        <!--Second slide-->
+        <div class="carousel-item text-center">
+            <figure class="col-md-3 d-md-inline-block">
+                <img th:src="@{cif.jpeg}" class="img-fluid " style="height: 150px; width: 150px; " alt="Responsive image">
+            </figure>
+            <figure class="col-md-3 d-md-inline-block">
+                    <img th:src="@{ala.jpg}" class="img-fluid " style="height: 150px; width: 150px; " alt="Responsive image">
+            </figure>
+            <figure class="col-md-3 d-md-inline-block">
+                <img th:src="@{comfort.png}" class="img-fluid " style="height: 150px; width: 150px; " alt="Responsive image">
+            </figure>
+
+        </div>
+        <!--/.Second slide-->
+
+        <!--Third slide-->
+        <div class="carousel-item text-center">
+            <figure class="col-md-3 d-md-inline-block">
+                <img th:src="@{axe.png}" class="img-fluid " style="height: 150px; width: 150px; " alt="Responsive image">
+            </figure>
+            <figure class="col-md-3 d-md-inline-block">
+                <img th:src="@{ades.png}" class="img-fluid " style="height: 150px; width: 150px; " alt="Responsive image">
+            </figure>
+            <figure class="col-md-3 d-md-inline-block">
+                <img th:src="@{dosanclas.jpeg}" class="img-fluid " style="height: 150px; width: 150px; " alt="Responsive image">
+            </figure>
+        </div>
+        <!--/.Third slide-->
+        <!--Third slide-->
+        <div class="carousel-item text-center">
+            <figure class="col-md-3 d-md-inline-block">
+                <img th:src="@{skip.png}" class="img-fluid " style="height: 150px; width: 150px; " alt="Responsive image">
+            </figure>
+            <figure class="col-md-3 d-md-inline-block">
+                <img th:src="@{dove.jpeg}" class="img-fluid " style="height: 150px; width: 150px; " alt="Responsive image">
+            </figure>
+            <figure class="col-md-3 d-md-inline-block">
+                <img th:src="@{helmans.png}" class="img-fluid " style="height: 150px; width: 150px; " alt="Responsive image">
+            </figure>
+        </div>
+        <!--/.Third slide-->
+
+    </div>
+    <!--/.Slides-->
+
+</div>
+<!--/.Carousel Wrapper-->
+<br>
+<div class="container">
+<h4 class="text-center">TripleH - Bolivar, Buenos Aires.</h4>
+    <p class="text-center">Venta autoservicio y distribucion de productos alimenticios y de limpieza, en reconocidas marcas del mercado.</p>
+</div>
+
+<footer th:replace="layout/layoutpublic :: footer"></footer>
+</body>
+</html>

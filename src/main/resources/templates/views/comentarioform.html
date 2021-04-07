@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+
+
+
+	<div th:if="${!listComentarios.empty }">
+		<h4 class="text-secondary text-center">
+			<u>Comentarios previos sobre el registro:</u>
+		</h4>
+		<!-- <div th:if="${not #lists.isEmpty(listComentarios)}"
+					class="alert alert-info my-4"
+					th:text="'No hay comentarios previos a este registro..'"></div> -->
+
+		<table style="width: 100%" class="table table-bordered animated fadeIn" >
+
+			<tbody>
+				<tr class="text-center" th:each="reg: ${listComentarios} ">
+					<td
+						th:if="${reg.factura == comentario.factura and reg.nombreEmpresa == comentario.nombreEmpresa and reg.clienteNombre == comentario.clienteNombre}">
+						<span class="text-info px-3"><u>Autor</u> : </span> <span
+						th:text="${reg.userComment}"></span>
+					</td>
+					<td
+						th:if="${reg.factura == comentario.factura and reg.nombreEmpresa == comentario.nombreEmpresa and reg.clienteNombre == comentario.clienteNombre}">
+						<span class="text-info"><u>Comentario</u> :</span> <span
+						th:text="${reg.comment}"></span>
+					</td>
+					<td
+						th:if="${reg.factura == comentario.factura and reg.nombreEmpresa == comentario.nombreEmpresa and reg.clienteNombre == comentario.clienteNombre}">
+						<a th:if="${ reg.userComment != username }"
+						title="No puede eliminar este registro..">
+							<button type="button" class="btn btn-outline-danger btn-sm"
+								disabled="true">
+								<i class="far fa-trash-alt"></i>
+							</button>
+					</a> <a th:if="${ reg.userComment == username }" title="Eliminar.."
+						th:href="'/comments/borrarcoment/' + ${reg.id}"
+						onclick="return confirm('Estas seguro que quieres eliminar?');">
+							<button type="button" class="btn btn-danger btn-sm">
+								<i class="fas fa-trash"></i>
+							</button>
+					</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<hr />
+	<hr />
+
+	<!-- FORMULARIO DE COMENTARIO  -->
+	<div class="fluid-container px-2 animated fadeIn fast">
+		<h4 class="text-secondary text-center">
+			<u>Nuevo comentario:</u>
+		</h4>
+
+		<div th:if="${emp != null}">
+			<form action="#" th:action="@{/comments/formguardaemp}"
+				th:object="${comentario}" method="post" id="formComentario">
+
+				<div class="row">
+					<div class="col">
+						<!-- <label>Nombre del cliente</label> -->
+						<input type="text" th:field="*{clienteNombre}"
+							class="form-control font-weight-bold text-center bg-light"
+							readonly="true" />
+					</div>
+					<div class="col">
+						<!-- <label>Nombre de la empresa</label> -->
+						<input type="text"
+							class="form-control text-center font-weight-bold bg-light text-success"
+							th:field="*{vendedor}" readonly="true" />
+					</div>
+
+					<div class="col">
+						<!-- <label>Nombre de la empresa</label> -->
+						<input type="text"
+							class="form-control text-center font-weight-bold bg-light text-success"
+							th:field="*{nombreEmpresa}" readonly="true" />
+					</div>
+				</div>
+
+
+				<div class="row">
+
+					<div class="col">
+						<label>Factura</label> <input type="text" th:field="*{factura}"
+							class="form-control" readonly="true" />
+					</div>
+
+					<div class="col">
+						<label>Fecha factura</label> <input type="text"
+							class="form-control" th:field="*{fechaFactura}" readonly="true" />
+					</div>
+
+					<div class="col">
+						<label>Importe factura</label> <input type="text"
+							th:field="*{impFactura}" class="form-control" readonly="true" />
+					</div>
+
+					<div class="col">
+						<label>Importe aplicado</label> <input type="text"
+							class="form-control" th:field="*{impAplicado}" readonly="true" />
+					</div>
+
+					<div class="col">
+						<label>Saldo</label> <input type="text" class="form-control"
+							th:field="*{saldo}" readonly="true" />
+					</div>
+				</div>
+
+
+				<div class="form-group">
+					<label>Comentario</label>
+					<textarea th:field="*{comment}" class="form-control"
+						maxlength="250" rows="3"></textarea>
+				</div>
+
+				<div class="card-body text-center">
+
+					<div>
+						<input type="submit" th:value="'Agregar comentario..'"
+							class="btn btn-success" />
+					</div>
+
+					<div th:if="${emp != null}" class="py-3">
+						<a th:text="'Salir sin guardar..'"
+							th:href="'/empresalistado/'+ ${id_empresa}"
+							class="btn btn-secondary"></a>
+					</div>
+
+					<div th:if="${ven != null}" class="py-3">
+						<a th:text="'Salir sin guardar..'"
+							th:href="'/vendedores/'+ ${comentario.nroVendedor}"
+							class="btn btn-secondary"></a>
+					</div>
+
+				</div>
+
+
+				<input type="hidden" th:field="*{userComment}" /> <input
+					type="hidden" th:field="*{nroVendedor}" /> <input type="hidden"
+					th:field="*{id_registro}" />
+			</form>
+
+		</div>
+
+		<div th:if="${ven != null}">
+			<form action="#" th:action="@{/comments/formguardaven}"
+				th:object="${comentario}" method="post" id="formComentario">
+
+				<div class="row">
+					<div class="col">
+						<!-- <label>Nombre del cliente</label> -->
+						<input type="text" th:field="*{clienteNombre}"
+							class="form-control font-weight-bold text-center bg-light"
+							readonly="true" />
+					</div>
+					<div class="col">
+						<!-- <label>Nombre de la empresa</label> -->
+						<input type="text"
+							class="form-control text-center font-weight-bold bg-light text-success"
+							th:field="*{vendedor}" readonly="true" />
+					</div>
+
+					<div class="col">
+						<!-- <label>Nombre de la empresa</label> -->
+						<input type="text"
+							class="form-control text-center font-weight-bold bg-light text-success"
+							th:field="*{nombreEmpresa}" readonly="true" />
+					</div>
+				</div>
+
+
+				<div class="row">
+
+					<div class="col">
+						<label>Factura</label> <input type="text" th:field="*{factura}"
+							class="form-control" readonly="true" />
+					</div>
+
+					<div class="col">
+						<label>Fecha factura</label> <input type="text"
+							class="form-control" th:field="*{fechaFactura}" readonly="true" />
+					</div>
+
+					<div class="col">
+						<label>Importe factura</label> <input type="text"
+							th:field="*{impFactura}" class="form-control" readonly="true" />
+					</div>
+
+					<div class="col">
+						<label>Importe aplicado</label> <input type="text"
+							class="form-control" th:field="*{impAplicado}" readonly="true" />
+					</div>
+
+					<div class="col">
+						<label>Saldo</label> <input type="text" class="form-control"
+							th:field="*{saldo}" readonly="true" />
+					</div>
+				</div>
+
+
+				<div class="form-group">
+					<label>Comentario</label>
+					<textarea th:field="*{comment}" class="form-control"
+						maxlength="250" rows="3"></textarea>
+				</div>
+
+				<div class="card-body text-center">
+
+					<div>
+						<input type="submit" th:value="'Agregar comentario..'"
+							class="btn btn-success" />
+					</div>
+
+					<div th:if="${emp != null}" class="py-3">
+						<a th:text="'Salir sin guardar..'"
+							th:href="'/empresalistado/'+ ${id_empresa}"
+							class="btn btn-secondary"></a>
+					</div>
+
+					<div th:if="${ven != null}" class="py-3">
+						<a th:text="'Salir sin guardar..'"
+							th:href="'/vendedores/'+ ${comentario.nroVendedor}"
+							class="btn btn-secondary"></a>
+					</div>
+
+				</div>
+
+
+				<input type="hidden" th:field="*{userComment}" /> <input
+					type="hidden" th:field="*{nroVendedor}" /> <input type="hidden"
+					th:field="*{id_registro}" />
+			</form>
+		</div>
+	</div>
+
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

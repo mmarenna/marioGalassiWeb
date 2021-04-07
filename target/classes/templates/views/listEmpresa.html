@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+
+<body>
+	<header th:replace="layout/layout :: header"></header>
+
+	<h5 class="text-center text-secondary " th:if="${!listempresa.empty}">
+		<i class="fas fa-list-ul"></i> <u>Listado detallado de la empresa:</u><span
+			class="font-weight-bold"
+			th:text="'    ' + ${listempresa[0].nombreEmpresa}"></span>
+	</h5>
+	<div th:if="${listempresa.empty}" class="container-fluid">
+		<h5 class="text-secondary">
+			No se encotraron registros para la empresa.. <br /> <a
+				th:href="@{/empresas}" class="btn btn-danger btn-sm">Atras..</a>
+		</h5>
+	</div>
+	<table class="table table-bordered table-responsive table-sm animated fadeIn fast"
+		style="width: 100%" th:if="${!listempresa.empty}">
+		<thead class="thead-light">
+			<tr class="text-center">
+				<!-- <th>as</th> -->
+				<th>Localidad</th>
+				<th>Nombre de Cliente</th>
+				<th>Nombre vendedor</th>
+				<th>Fecha factura</th>
+				<th>Factura</th>
+				<th>Tipo comprobante</th>
+
+				<th>Importe Factura</th>
+				<th>Importe aplicado</th>
+				<th>Saldo Factura</th>
+				<th>Saldo Cliente</th>
+				<th class="text-center">Comentario</th>
+
+			</tr>
+		</thead>
+		<tbody>
+			<tr class="text-center" th:each="reg, registro: ${listempresa} ">
+				<!-- <td th:text="${reg.estadoFactura}"></td> -->
+
+				<td class="font-weight-bold texr"
+					th:text="${registro.index == 0 || listempresa[registro.index].localidad != listempresa[registro.index - 1].localidad} ? ${reg.localidad} : '---'"></td>
+				<td class="font-weight-bold "
+					th:text="${registro.index == 0 || listempresa[registro.index].clienteNombre != listempresa[registro.index - 1].clienteNombre} ? ${reg.clienteNombre} : '---'"></td>
+				<td class="font-weight-bold text-success text-center"
+					th:text="${registro.index == 0 || listempresa[registro.index].vendedor != listempresa[registro.index - 1].vendedor || listempresa[registro.index].clienteNombre != listempresa[registro.index - 1].clienteNombre } ? ${reg.vendedor} : '---'"></td>
+
+				<!--  EL COLOR DE LA FECHA FACTURA ESTA DADO POR EL ATRIBUTO "ESTADOFACTURA" -->
+
+				<td th:if="${ reg.estadoFactura == 1}"
+					th:text="${#dates.format(reg.fechaFactura, 'dd-MMM-yyyy')}"></td>
+				<td th:if="${ reg.estadoFactura == 2}" th:class="text-info"
+					th:text="${#dates.format(reg.fechaFactura, 'dd-MMM-yyyy')}"></td>
+				<td th:if="${ reg.estadoFactura == 3}" th:class="text-danger "
+					th:text="${#dates.format(reg.fechaFactura, 'dd-MMM-yyyy')}"></td>
+
+				<td th:text="${reg.factura}"></td>
+				<td th:text="${reg.tipoComprobante}"></td>
+
+				<td class="text-right">$ <span
+					th:text="${#numbers.formatDecimal(reg.impFactura, 0, 'POINT', 2, 'COMMA')}"></span></td>
+
+				<td class="text-right">$ <span
+					th:text="${#numbers.formatDecimal(reg.impAplicado, 0, 'POINT', 2, 'COMMA')}"></span></td>
+
+
+				<td class="text-right">$ <span
+					th:text="${#numbers.formatDecimal(reg.saldo, 0, 'POINT', 2, 'COMMA')}"></span></td>
+
+				<td class="bg-dark text-success text-right"
+					th:text="${registro.index == 0 || listempresa[registro.index].localidad != listempresa[registro.index - 1].localidad || 
+					registro.index == 0 || listempresa[registro.index].clienteNombre != listempresa[registro.index - 1].clienteNombre ||
+					registro.index == 0 || listempresa[registro.index].vendedor != listempresa[registro.index - 1].vendedor} ? ${#numbers.formatDecimal(reg.saldoUnificado, 0, 'POINT', 2, 'COMMA')} : '---'"></td>
+				<td><div class="btn-group">
+						<a th:if="${reg.comentario}"
+							class="btn btn-secondary btn-sm float-left "
+							th:href="@{/comments/comentarioformemp/} + ${reg.id_registros}"><i
+							class="fas fa-plus-circle"></i> / <i class="fas fa-list-ul"></i></a>
+						<a th:if=" ${!reg.comentario}"
+							class="btn btn-outline-secondary float-left btn-sm"
+							th:href="@{/comments/comentarioformemp/} + ${reg.id_registros}"><i
+							class="fas fa-plus-circle"></i> / <i class="fas fa-list-ul"></i></a>
+						<!-- <a class="btn btn-outline-info  btn-xs" th:text="'Coments.'"></a> -->
+					</div></td>
+
+			</tr>
+		</tbody>
+	</table>
+
+
+
+
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

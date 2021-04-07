@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+<header th:replace="layout/layoutpublic :: header"></header>
+
+<!DOCTYPE html>
+<html>
+
+<body>
+<div class="card-body text-left" >
+    <a  title="Volver.." th:href="@{/inicio}"><button class=" btn btn-danger btn-sm"><i class="fas fa-arrow-circle-left"></i> Volver..</button></a>
+</div>
+<br>
+<h2 class="text-secondary text-center"><i class="fas fa-map-marker-alt"></i><u> Mapa</u></h2>
+<p class="text-center">Zona de cobertura.</p>
+<hr/>
+<div class="container text-center">
+    <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1ut6dFvtRNVrG1xLdMf5Gl-50MdpUydbC" width="1200" height="500"></iframe>
+<br><br>
+    <h4 class="text-center"><u>TripleH</u></h4>
+    <p class="text-primary">Pehuajo - Henderson - Pirovano - Urdampilleta - <span class="text-danger">San Carlos de Bolivar </span></p>
+
+</div>
+
+</body>
+</html>
+<footer th:replace="layout/layoutpublic :: footer"></footer>
+</body>
+</html>

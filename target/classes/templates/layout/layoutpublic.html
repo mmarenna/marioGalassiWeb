@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:fragment="head">
+        <meta charset="UTF-8" />
+        <title th:text="'TripleH App'"></title>
+
+        <!-- REFERENCIO MIS ESTILOS -->
+        <link rel="stylesheet" th:href="@{/css/styles.css}" />
+        <link rel="icon" type="image/png" href="oficial.png" />
+
+        <link rel="stylesheet"
+              href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+              integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+              crossorigin="anonymous" />
+
+        <script src="https://use.fontawesome.com/releases/v5.0.9/js/all.js"
+                integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl"
+                crossorigin="anonymous"></script>
+
+
+        <!-- MDBootstrap Datatables  -->
+        <link href="css/addons/datatables.min.css" rel="stylesheet">
+        <!-- MDBootstrap Datatables  -->
+        <script type="text/javascript" src="js/addons/datatables.min.js"></script>
+        <script type="text/javascript" th:src="@{/js/main.js}"></script>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-128104309-2"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'UA-128104309-2');
+        </script>
+    </head>
+    <body>
+
+        <header th:fragment="header">
+
+                    <nav class="navbar navbar-expand-md navbar-dark bg-dark py-1 responsive">
+                        <a class="navbar-brand text-warning" th:href="@{/inicio}"><i
+                            class="fas fa-home"></i> Inicio</a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                            data-target="#navbarSupportedContent"
+                            aria-controls="navbarSupportedContent" aria-expanded="false"
+                            aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav mr-auto">
+                               <!-- <li class="nav-item active"><a class="nav-link" href="#about" th:href="@{/quienes}"><i class="fas fa-question-circle"></i> Quienes Somos</a></li>-->
+                                <li class="nav-item active"><a class="nav-link" href="#about" th:href="@{/contacto}"><i class="fas fa-envelope"></i> Contacto</a></li>
+                                <li class="nav-item active"><a class="nav-link" href="#about" th:href="@{/ofertas}"><i class="fas fa-list"></i> Listado de Ofertas</a></li>
+                                <li class="nav-item active"><a class="nav-link" href="#about" th:href="@{/zona}"><i class="fas fa-map-marker-alt"></i> Zona</a></li>
+                                <li class="nav-item active"><a class="nav-link" href="#about" th:href="@{/marcas}"><i class="fas fa-tags"></i>  Marcas</a></li>
+                            </ul>
+                                <button class="btn btn-sm btn-warning" type="submit">
+                                    <a th:href="@{/login}">
+                                        <span class="text-secondary">
+                                            <i class="fas fa-sign-out-alt"></i> Acceso usuario
+                                        </span>
+                                    </a>
+                                </button>
+
+                        </div>
+                    </nav>
+            <!--
+            <h1 class="text-secondary text-center"> 	<a class="text-success text-center" th:href="@{/home}"><i
+                    class="fas fa-home"></i> <u>TripleH App</u></a></h1>
+            <br/>
+
+            <h4 class="text-secondary px-3 text-center">
+                <i class="fas fa-user"></i> <u>Usuario:</u> <span class="text-success" th:text="${username}"></span>  <br/><form class="px-4" th:action="@{/logout}" method="POST">
+                <br/>
+                <button class="btn btn-sm btn-danger" type="submit">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </form>
+-->
+        </header>
+
+
+        <footer th:fragment="footer"
+                class="container-fluid text-center text-secondary">
+            <hr>
+            <p class="text-center"><i class="fas fa-envelope"></i> arielmaxwel@hotmail.com  <i class="fas fa-phone"></i> 02314 428005    <i class="fas fa-mobile"></i>  02317-15473028</p>
+            <p class="text-center"><i class="fas fa-home"></i> Sargento Cabral 345. C.P 6550. Bolivar.</p>
+        <p>
+            <strong>&copy; Sistema - TripleH</strong>
+        </p>
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+                integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+                crossorigin="anonymous"></script>
+        <script
+                src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+                integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+                crossorigin="anonymous"></script>
+        <script
+                src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+                integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+                crossorigin="anonymous"></script>
+        </footer>
+    </body>
+</html>

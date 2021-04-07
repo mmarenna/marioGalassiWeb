@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+<meta charset="UTF-8" />
+<title th:text="'TripleH App'"></title>
+
+<!-- REFERENCIO MIS ESTILOS -->
+<link rel="stylesheet" th:href="@{/css/styles.css}" />
+	<link rel="icon" type="image/png" href="oficial.png" />
+
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous" />
+
+<script src="https://use.fontawesome.com/releases/v5.0.9/js/all.js"
+	integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl"
+	crossorigin="anonymous"></script>
+
+
+	<!-- MDBootstrap Datatables  -->
+	<link href="css/addons/datatables.min.css" rel="stylesheet">
+	<!-- MDBootstrap Datatables  -->
+	<script type="text/javascript" src="js/addons/datatables.min.js"></script>
+<script type="text/javascript" th:src="@{/js/main.js}"></script>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-128104309-2"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'UA-128104309-2');
+	</script>
+</head>
+<body>
+	
+	
+	<header th:fragment="header">
+<!--
+		<nav class="navbar navbar-expand-md navbar-dark bg-dark py-1 responsive">
+			<a class="navbar-brand text-success" th:href="@{/home}"><i
+				class="fas fa-home"></i></a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarSupportedContent"
+				aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                                <ul class="navbar-nav mr-auto">
+
+
+
+                                                                    <li class="nav-item active"><a class="nav-link" href="#about"
+                                                                        th:href="@{/listarclientes}">Registros Generales</a></li>
+
+                                                                    <li
+                                                                        th:if="${username == 'Admin' || username == 'Marenna' || username == 'Galassie' || username == 'Galassim'}"
+                                                                        class="nav-item active"><a class="nav-link" href="#about"
+                                                                        onclick="test()" th:href="@{/comments/comentarios}">Administrar
+                                                                            comentarios..</a></li>
+
+                                                                    <li
+                                                                        th:if="${username == 'Admin' || username == 'Marenna' || username == 'Galassie' || username == 'Galassim'}"
+                                                                        class="nav-item active"><a class="nav-link" href="#about"
+                                                                        th:href="@{/empresas}">Datos Empresas</a></li>
+                                                                    <li class="nav-item dropdown"><a
+                                                                        class="nav-link dropdown-toggle text-info" href="#"
+                                                                        id="navbarDropdown" role="button" data-toggle="dropdown"
+                                                                        aria-haspopup="true" aria-expanded="false"><i
+                                                                            class="fas fa-users"></i> Vendedores </a>
+                                                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                                            <a class="dropdown-item" th:href="@{/vendedor/1}">Vendedor 1</a> <a
+                                                                                class="dropdown-item" th:href="@{/vendedor/5}">Mostrador</a><a
+                                                                                class="dropdown-item" th:href="@{/vendedor/9}">Vendedor  9</a> <a
+                                                                                class="dropdown-item" th:href="@{/vendedor/12}">Vivas Gustavo</a>
+                                                                            <a class="dropdown-item" th:href="@{/vendedor/81}">Cliente sin asignar</a>
+                                                                        </div></li>
+
+                                                </ul>
+
+				<li><i class="fas fa-sign-in-alt text-success "></i> <span
+					class="text-success" th:text="${username}"></span></li>
+				<form class="px-4" th:action="@{/logout}" method="POST">
+					<button class="btn btn-sm btn-danger" type="submit">
+						<i class="fas fa-sign-out-alt"></i> Logout
+					</button>
+				</form>
+				 <form class="form-inline my-2 my-lg-0">
+					<input class="form-control mr-sm-2" type="search"
+						placeholder="Search" aria-label="Search">
+					<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+				</form>
+			</div>
+		</nav>
+-->
+			<h1 class="text-secondary text-center"> 	<a class="text-success text-center" th:href="@{/admin}"><i
+					class="fas fa-home"></i> <u>Inicio</u></a></h1>
+			<br/>
+
+			<h4 class="text-secondary px-3 text-center">
+				<i class="fas fa-user"></i> <u>Usuario:</u> <span class="text-success" th:text="${username}"></span>  <form class="px-4" th:action="@{/logout}" method="POST">
+				<button class="btn btn-sm btn-danger" type="submit">
+					<i class="fas fa-sign-out-alt"></i> Logout
+				</button> <br/>
+			</form>
+<div class="container">
+		<div class="alert alert-success" th:if="${success != null}"
+			th:text="${success}"></div>
+		<div class="alert alert-danger" th:if="${error != null}"
+			th:text="${error}"></div>
+		<div class="alert alert-warning" th:if="${warning != null}"
+			th:text="${warning}"></div>
+		<div class="alert alert-info" th:if="${info != null}"
+			th:text="${info}"></div>
+</div>
+	</header>
+
+
+	<footer th:fragment="footer"
+		class="container-fluid text-center text-success">
+		<!-- Google Analytics -->
+		<script>
+			window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) }; ga.l = +new Date;
+			ga('create', 'UA-128104309-1', 'auto');
+			ga('send', 'pageview');
+		</script>
+		<script async src='https://www.google-analytics.com/analytics.js'></script>
+		<!-- End Google Analytics -->
+		<p>
+			<strong>&copy; Sistema - TripleH</strong>
+		</p>
+		<!-- Optional JavaScript -->
+		<!-- jQuery first, then Bootstrap JS -->
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+			integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+			crossorigin="anonymous"></script>
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+			integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+			crossorigin="anonymous"></script>
+		<script
+			src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+			integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+			crossorigin="anonymous"></script>
+
+		<!-- Google Analytics -->
+		<script>
+			window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) }; ga.l = +new Date;
+			ga('create', 'UA-128104309-1', 'auto');
+			ga('send', 'pageview');
+		</script>
+		<script async src='https://www.google-analytics.com/analytics.js'></script>
+		<!-- End Google Analytics -->
+	</footer>
+</body>
+</html>

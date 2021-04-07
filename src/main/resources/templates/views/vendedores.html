@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+						
+	<div th:if="${vendedor != null}" class="text-center">
+		<div class="card container animated fadeIn fast text-center" >
+
+			<div class="card-body">
+
+				<h4 class="card-title text-secondary">
+					<i class="fas fa-user"></i> <u>Detalle del vendedor:</u>
+				</h4>
+				<h5 class="card-text"
+					th:text="${vendedor.apellido + '  '  + vendedor.nombre}"></h5>
+			</div>
+			<ul class="list-group list-group-flush">
+				<li class="list-group-item"
+					th:text="${'Descripcion:   '+ vendedor.description}"></li>
+				<li class="list-group-item"
+					th:text="${'Email:   ' + vendedor.email}"></li>
+				<li class="list-group-item"
+					th:text="${'Telefono:   ' + vendedor.telefono}"></li>
+			</ul>
+
+			<div class="card-body "
+				th:switch="${vendedor.apellido == username || username == 'Admin' || username == 'Marenna' || username == 'Herrero'}">
+
+
+				<div th:case="true">
+					<div>
+						<a th:href="@{/vendedores/} + ${vendedor.idEnListado}"
+							class="btn btn-secondary btn-sm" th:text="'Listado del vendedor...'"></a>
+					</div>
+					<div class="py-3">
+						<a th:href="@{/comments/comvendedor/} + ${vendedor.idEnListado}"
+							class="btn btn-secondary btn-sm" th:text="'Comentarios...'"></a>
+					</div>
+				</div>
+				<div th:case="false">
+					<div class="">
+						<a class="btn btn-sm btn-outline-danger" disabled="true"
+							th:text="'Listado del vendedor...'"></a>
+					</div>
+					<div class="py-3">
+						<a class="btn btn-sm btn-outline-danger" disabled="true"
+							th:text="'Comentarios...'"></a>
+					</div>
+				</div>
+
+
+			</div>
+		</div>
+	</div>
+	
+
+
+	<footer th:replace="layout/layout :: footer"></footer>
+	
+</body>
+</html>

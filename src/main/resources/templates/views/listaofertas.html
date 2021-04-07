@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+<header th:replace="layout/layoutpublic :: header"></header>
+<div class="card-body text-left" >
+    <a  title="Volver.." th:href="@{/inicio}"><button class=" btn btn-danger btn-sm"><i class="fas fa-arrow-circle-left"></i> Volver..</button></a>
+</div>
+<br>
+
+<h3 class="text-center text-secondary"><i class="fas fa-list"></i> <u>Listado de Ofertas</u></h3>
+<p class="text-center">Listado de ofertas disponibles actualmente.</p>
+<hr/>
+<div th:if="${listaofertas.empty}" class="container bg-light">
+    <div class="text-center card-header text-success"><h5><u>No existen promociones vigentes a la fecha.</u></h5>
+    </div>
+</div>
+<div th:if="${!listaofertas.empty}" class="container bg-light">
+
+    <div class="text-center card-header text-success"><h5><u>Fecha de vigencia promocional</u></h5>
+        <p><span class="text-secondary" th:text="${listaofertas[0].getFecha()}"></span></p>
+    </div>
+
+    <div class="table table-bordered table-responsive table-sm animated fadeIn fast">
+        <br/>
+
+        <table class="table table-hover">
+            <thead>
+            <tr class="text-center">
+                <th>Categoria</th>
+                <th>Linea</th>
+                <th>Porcentaje de descuento</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="text-center" th:each="reg, registro: ${listaofertas} " >
+                <td th:text="${reg.categoria}"></td>
+                <td th:text="${reg.linea}"></td>
+                <td th:text="${reg.porcentaje}"></td>
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>
+
+<footer th:replace="layout/layoutpublic :: footer"></footer>
+</body>
+</html>

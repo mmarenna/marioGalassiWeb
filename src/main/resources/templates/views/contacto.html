@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+<header th:replace="layout/layoutpublic :: header"></header>
+<div class="card-body text-left" >
+    <a  title="Volver.." th:href="@{/inicio}"><button class=" btn btn-danger btn-sm"><i class="fas fa-arrow-circle-left"></i> Volver..</button></a>
+</div>
+<br>
+<div class="container">
+
+    <h3 class="text-center text-secondary"><i class="fas fa-envelope"></i>  <u>Contacto</u></h3><hr/>
+    <p class="text-center"> Dejanos tu consulta, te responderemos a la brevedad.</p>
+    <hr/>
+
+<br><br>
+<form action="#" th:action="@{/comments/guardacontacto}"
+      th:object="${contacto}" method="post" id="formComentario">
+
+    <div class="row">
+        <div class="col">
+            <label>Correo</label> <input type="text"
+                                                class="form-control" th:field="*{email}"/>
+        </div>
+        <div class="col">
+            <label>Telefono</label> <input type="text"
+                                                  th:field="*{telefono}" class="form-control"/>
+        </div>
+        <div class="col">
+            <label>Empresa</label> <input type="text"
+                                           th:field="*{empresa}" class="form-control"/>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Mensaje</label>
+        <textarea th:field="*{mensaje}" class="form-control"
+                  maxlength="250" rows="3"></textarea>
+    </div>
+
+    <div class="card-body text-center">
+        <div>
+            <input type="submit" th:value="'Enviar..'"
+                   class="btn btn-warning" />
+        </div>
+    </div>
+</form>
+</div>
+
+<footer th:replace="layout/layoutpublic :: footer"></footer>
+</body>
+</html>

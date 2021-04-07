@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+<header th:replace="layout/layout :: header"></header>
+
+<div class="container responsive">
+    </h4>
+    <hr />
+    <div class="row">
+    <div class="col-sm-4">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title">REGISTROS GENERALES</h3>
+                <p class="card-text">Gestion de los contactos generales.</p>
+                <a class="btn btn-secondary" href="#about"
+                   th:href="@{/listarclientes}">Registros Generales</a>
+            </div>
+        </div>
+    </div>
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title">ARCHIVOS</h3>
+                    <p class="card-text">Gestion de archivos  de la Web</p>
+                    <a href="#"  th:href="@{/subirimagenes}" class="btn btn-secondary">Listado de Precios </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title">OFERTAS</h3>
+                    <p class="card-text">Gestion de las ofertas</p>
+                    <a class="btn btn-secondary" href="#about"
+                       th:href="@{/formofertas}">Administrar Ofertas</a>
+                </div>
+            </div>
+        </div>
+    </div>
+<br/><br/>
+      <div class="row">
+          <div class="col-sm-4">
+              <div class="card">
+                  <div class="card-body">
+          <h3 class="card-title">VENDEDORES</h3>
+          <p class="card-text">Gestion de vendedores.</p>
+              <a
+                      class="nav-link dropdown-toggle text-info" href="#"
+                      id="navbarDropdown" role="button" data-toggle="dropdown"
+                      aria-haspopup="true" aria-expanded="false"><i
+                      class="fas fa-users"></i> Vendedores </a>
+                      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                          <a class="dropdown-item" th:href="@{/vendedor/1}">Vendedor 1</a> <a
+                              class="dropdown-item" th:href="@{/vendedor/5}">Mostrador</a><a
+                              class="dropdown-item" th:href="@{/vendedor/9}">Vendedor  9</a> <a
+                              class="dropdown-item" th:href="@{/vendedor/12}">Vivas Gustavo</a>
+                          <a class="dropdown-item" th:href="@{/vendedor/81}">Cliente sin asignar</a>
+                      </div>
+      </div>
+      </div>
+</div>
+
+          <div  th:if="${username == 'Admin' || username == 'Marenna' || username == 'Herrero'  || username == 'Bolivar'}" class="col-sm-4">
+              <div class="card">
+                  <div class="card-body">
+                      <h3 class="card-title">COMENTARIOS</h3>
+                      <p class="card-text">Gestion de comentarios.</p>
+                      <a class="btn btn-secondary" href="#about"
+                         onclick="test()" th:href="@{/comments/comentarios}">Administrar
+                          comentarios..</a>
+                  </div>
+              </div>
+          </div>
+
+          <div  th:if="${username == 'Admin' || username == 'Marenna' || username == 'Herrero' || username == 'Bolivar'}" class="col-sm-4">
+              <div class="card">
+                  <div class="card-body">
+                      <h3 class="card-title">CONTACTOS</h3>
+                      <p class="card-text">Gestion de contactos de clientes.</p>
+                      <a class="btn btn-secondary" href="#about"
+                         th:href="@{/comments/contactos}">Administrar
+                          contactos..</a>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+    <br/><br/>
+
+    <div class="row">
+
+    </div>
+
+    <!--
+      <br/><br/>
+      <div class="row">
+          <div class="col-sm-4">
+              <div class="card">
+                  <div class="card-body">
+                      <h3 class="card-title">Agregar nuevo Socio</h3>
+                      <p class="card-text">Gestion de un nuevo Socio.</p>
+                      <a href="#" th:href="@{/admin/sociosAdmin}" class="btn btn-info"> Socios</a>
+                  </div>
+              </div>
+          </div>
+          <div class="col-sm-4">
+              <div class="card">
+                  <div class="card-body">
+                      <h3 class="card-title">Listado de socios</h3>
+                      <p class="card-text">Gestion de socios para actualizar cuotas, datos, etc.</p>
+                      <a href="#" th:href="@{/admin/sociosadmin}" class="btn btn-info"> Socios</a>
+                  </div>
+              </div>
+          </div>
+          <div class="col-sm-4">
+              <div class="card">
+                  <div class="card-body">
+                      <h3 class="card-title">Cobradores</h3>
+                      <p class="card-text">Gestion de cobradores</p>
+                      <a href="#" th:href="@{/admin/cobradores}" class="btn btn-primary"><i class="fas fa-user"></i> Cobradores</a>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <br/><br/>
+      <div class="row">
+          <div class="col-sm-4">
+              <div class="card">
+                  <div class="card-body">
+                      <h2 class="card-title">Perritos</h2>
+                      <p class="card-text">Edicion de los perritos del refu.</p>
+                      <a href="#" th:href="@{/admin/perritosadmin}" class="btn btn-success"><i class="fas fa-paw" ></i> Perritos</a>
+                  </div>
+              </div>
+          </div>
+          <div class="col-sm-4">
+              <div class="card">
+                  <div class="card-body">
+                      <h3 class="card-title">Voluntarios</h3>
+                      <p class="card-text">Gestion de voluntarios.</p>
+                      <a href="#"  th:href="@{/admin/voluntariosadmin}" class="btn btn-primary"><i class="fas fa-user"></i> Voluntarios</a>
+                  </div>
+              </div>
+          </div>
+
+
+      <br/><br/>
+      <div  class="row">
+          <div class="col-sm-4">
+              <div class="card">
+                  <div class="card-body">
+                      <h3 class="card-title">ARCHIVOS</h3>
+                      <p class="card-text">Gestion de archivos  de la Web</p>
+                      <a href="#"  th:href="@{/subirimagenes}" class="btn btn-primary">Listado de Precios </a>
+                  </div>
+              </div>
+          </div>
+      </div>
+      -->
+  </div>
+
+<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

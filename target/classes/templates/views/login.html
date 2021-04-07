@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8" />
+
+  <title>TripleH - Login</title>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+
+  <!-- Custom styles for this template -->
+  <link rel="icon" type="image/png" href="/oficial.png" />
+  <link href="#" th:href="@{login.css}" rel="stylesheet" />
+  <link href="#" th:href="@{style.css}" rel="stylesheet" />
+  <script src="https://use.fontawesome.com/releases/v5.0.9/js/all.js"
+          integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl"
+          crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+
+<div class="container">
+
+  <form class="form-signin animated fadeIn fast"
+        th:action="@{/logincheck}" method="POST">
+    <input type="hidden" name="${_csrf.parametername}"
+           value="$_csrf.token}"></input>
+    <h2 class="form-signin-heading">Login</h2>
+    <label for="inputEmail" class="sr-only">Username</label> <input
+          type="text" class="form-control" placeholder="Username"
+          name="username" id="username" /> <label for="inputPassword"
+                                                  class="sr-only">Password</label> <input type="password"
+                                                                                          class="form-control" placeholder="Password" id="password"
+                                                                                          name="password" />
+    <div th:if="${error != null}" class="alert alert-danger" role="alert">Invalid
+      username or password</div>
+    <div th:if="${logout != null}" class="alert alert-info" role="alert">Logout
+      SUCCESSFULLY</div>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">
+      <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
+      Sign in
+    </button>
+    <a th:href="@{/inicio}" class="btn btn-lg btn-success btn-block"
+       title="Ir TripleH Web">TripleH</a>
+  </form>
+
+
+
+</div>
+<!-- /container -->
+
+</body>
+</html>

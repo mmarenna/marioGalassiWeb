@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="layout/layout :: head"></head>
+<body>
+<header th:replace="layout/layout :: header"></header>
+
+<div class="container-fluid text-center">
+    <h5 class="text-center text-secondary " th:if="${!listacontactos.empty}">
+        <i class="fas fa-list-ul"></i> <u>Listado de los contactos:</u>
+    </h5>
+<br><br>
+    <div  th:if="${!listacontactos.empty}">
+        <div class="container">
+        <table class="table  table-responsive  animated fadeIn fast"
+               style="width: 100%">
+            <thead class="thead-light">
+            <tr class="text-center">
+                <th>#</th>
+                <th>Empresa</th>
+                <th>Telefono</th>
+                <th>Correo</th>
+                <th>Fecha</th>
+                <th class="text-center">Comentario</th>
+                <th class="text-center">Eliminar</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="text-center" th:each="reg, registro: ${listacontactos} " >
+                <td th:text="${reg.id}"></td>
+                <td th:text="${reg.empresa}"></td>
+                <td th:text="${reg.telefono}"></td>
+                <td th:text="${reg.email}"></td>
+                <td th:text="${reg.fecha}"></td>
+                <td th:text="${reg.mensaje}"></td>
+                <td><a class="btn-lg btn-outline-danger " title="Eliminar Mensaje" th:href="@{/comments/eliminaContacto/} + ${reg.id}" onclick="return confirm('Estas seguro que quieres eliminar el mensaje?');"><i class="fas fa-trash"></i></a></td>
+            </tr>
+            </tbody>
+        </table>
+        </div>
+
+    </div>
+</div>
+</div>
+
+
+<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

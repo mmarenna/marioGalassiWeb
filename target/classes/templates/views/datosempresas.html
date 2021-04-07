@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container py-4"></div>
+
+	
+	<h4 class="card-header text-secondary text-center" th:text="${'Listado de empresas..'}" ></h4>
+	<div id="empresas">
+
+		<table id="tab_empresas" class="table table-bordered table-responsive table-sm animated fadeIn fast"
+			style="width: 100%">
+			<thead>
+				<tr class="text-center">
+					<th>Listado empresa..</th>
+					<th>Nombre</th>
+					<th>Plazo Vencimiento</th>
+					<th>Direccion</th>
+					<th>Telefono</th>
+					<th>Email</th>
+					<th>Cuit</th>
+					<th>Codigo Postal</th>
+					<th>Localidad</th>
+					<th>Provincia</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="registro: ${listEmpresas}" class="text-center">
+					<td><a th:href="@{/empresalistado/} + ${registro.id_provgalassi}" class="btn btn-info"><i class="fas fa-list-ul"></i></a></td>
+					<td th:text="${registro.nombre}"></td>
+					<td th:text="${registro.plazoVencimiento}"></td>
+					<td th:text="${registro.direccion}"></td>
+					<td th:text="${registro.telefono}"></td>
+					<td th:text="${registro.email}"></td>
+					<td th:text="${registro.cuit}"></td>
+					<td th:text="${registro.codPostal}"></td>
+					<td th:text="${registro.localidad}"></td>
+					<td th:text="${registro.provincia}"></td>
+
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+
+
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="layout/layout :: head"></head>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="py-3">
+		<div class="dropdown show text-center">
+			<a
+				class="btn btn-outline-primary btn-sm dropdown-toggle" href="#"
+				role="button" id="dropdownMenuLink" data-toggle="dropdown"
+				aria-haspopup="true" aria-expanded="false"><i class="fas fa-users"></i> Vendedores.. </a>
+
+			<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+
+				<a class="dropdown-item" th:href="@{/comments/comentarios}">Limpiar
+					filtro..</a>
+				<div class="dropdown-divider"></div>
+				<a class="dropdown-item" th:href="@{/comments/comentarios/1}">Vendedor 1</a> <a
+					class="dropdown-item" th:href="@{/comments/comentarios/5}">Mostrador</a><a
+					class="dropdown-item" th:href="@{/comments/comentarios/9}">Vendedor 9</a> <a
+					class="dropdown-item" th:href="@{/comments/comentarios/12}">Vivas</a>
+			</div>
+
+		</div>
+
+	</div>
+
+
+	<h3 class="text-center card-header text-secondary "
+		th:if="${!listcomentarios.empty}">
+		<button class="btn btn-outline-dark btn-sm" onclick="showhideArch()">
+			<i class="fas fa-list-ul"></i>  <u>Listado comentarios Archivados:</u>
+		</button>
+	</h3>
+	<div id="archivados" class="responsive" style="display: none;"
+		th:if="${!listcomentarios.empty}">
+
+
+
+		<table id="tablaArchivados"
+			class="table table-bordered table-responsive table-sm animated fadeIn fast" style="width: 100%">
+			<thead class="">
+				<tr class="text-center">
+					<th class="bg-light">Vendedor</th>
+					<th>Nombre de Cliente</th>
+					<th>Nombre empresa</th>
+					<th>Fecha factura</th>
+					<th>Factura</th>
+					<th>Importe Factura</th>
+					<th>Importe aplicado</th>
+					<th>Saldo Factura</th>
+					<th class="bg-light">Fecha comentario</th>
+					<th class="text-left text-success bg-light">Autor</th>
+					<th class="text-left text-success bg-light">Comentario</th>
+					<th class="bg-light">Accion</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class="text-center" th:each="reg, registro: ${listcomentarios} ">
+					<td th:if="${reg.archivado == true}"
+						class="font-weight-bold bg-light" th:text="${reg.vendedor}"></td>
+
+					<td th:if="${reg.archivado == true}" th:text="${reg.clienteNombre}"></td>
+					<td th:if="${reg.archivado == true}" th:text="${reg.nombreEmpresa}"></td>
+					<td th:if="${reg.archivado == true}"
+						th:text="${#dates.format(reg.fechaFactura, 'dd-MMM-yyyy')}"></td>
+					<td th:if="${reg.archivado == true}" th:text="${reg.factura}"></td>
+					<td th:if="${reg.archivado == true}">$ <span
+						th:text="${#numbers.formatDecimal(reg.impFactura, 0, 'POINT', 2, 'COMMA')}"></span></td>
+					<td th:if="${reg.archivado == true}">$ <span
+						th:text="${#numbers.formatDecimal(reg.impAplicado, 0, 'POINT', 2, 'COMMA')}"></span></td>
+					<td th:if="${reg.archivado == true}">$ <span
+						th:text="${#numbers.formatDecimal(reg.saldo, 0, 'POINT', 2, 'COMMA')}"></span></td>
+					<td th:if="${reg.archivado == true}"
+						class="bg-light font-weight-bold"
+						th:text="${#dates.format(reg.fechacomment, 'dd-MMM-yyyy')}"></td>
+					<td th:if="${reg.archivado == true}"
+						class="bg-light font-weight-bold" th:text="${reg.userComment}"></td>
+					<td th:if="${reg.archivado == true}"
+						class="text-left bg-light font-weight-bold"
+						th:text="${reg.comment}"></td>
+					<td class="bg-light btn-group" th:if="${reg.archivado == true}"><a
+						class="btn btn-outline-primary" title="Desarchivar"
+						th:href="@{/comments/archivar/} + ${reg.id}"><i class="fas fa-archive"></i></a><a title="Eliminar"
+						class="btn btn-danger" th:href="@{/comments/borrarcoment/} + ${reg.id}"><i class="fas fa-trash"></i></a></td>
+					<!-- <td th:if="${reg.archivado == true}" th:text="${reg.archivado}"></td> -->
+				</tr>
+			</tbody>
+		</table>
+
+	</div>
+
+
+	<h3 class="text-center card-header text-secondary "
+		th:if="${!listcomentarios.empty}">
+		<button class="btn btn-outline-dark btn-sm" onclick="showhideAct()">
+			<i class="fas fa-list-ul"></i>  <u>Listado comentarios Activos:</u>
+		</button>
+	</h3>
+	<div id="activos" class="responsive" th:if="${!listcomentarios.empty}">
+
+
+		<table id="tablaActivos"
+			class="table table-bordered  table-responsive table-sm animated fadeIn fast" style="width: 100%">
+			<thead class="">
+				<tr class="text-center">
+					<th class="bg-light">Vendedor</th>
+
+					<th>Nombre de Cliente</th>
+					<th>Nombre empresa</th>
+					<th>Fecha factura</th>
+					<th>Factura</th>
+					<th>Importe Factura</th>
+					<th>Importe aplicado</th>
+					<th>Saldo Factura</th>
+					<th class="bg-light">Fecha comentario</th>
+					<th class="text-left text-success bg-light">Autor</th>
+					<th class="text-left text-success bg-light">Comentario</th>
+					<!-- <th>Archivado</th> -->
+					<th class="text-left text-success bg-light">Accion</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class="text-center" th:each="reg, registro: ${listcomentarios} ">
+
+					<td th:if="${reg.archivado == false}"
+						class="font-weight-bold bg-light" th:text="${reg.vendedor}"></td>
+					<td th:if="${reg.archivado == false}"
+						th:text="${reg.clienteNombre}"></td>
+					<td th:if="${reg.archivado == false}"
+						th:text="${reg.nombreEmpresa}"></td>
+					<td th:if="${reg.archivado == false}"
+						th:text="${#dates.format(reg.fechaFactura, 'dd-MMM-yyyy')}"></td>
+					<td th:if="${reg.archivado == false}" th:text="${reg.factura}"></td>
+					<td th:if="${reg.archivado == false}">$ <span
+						th:text="${#numbers.formatDecimal(reg.impFactura, 0, 'POINT', 2, 'COMMA')}"></span></td>
+					<td th:if="${reg.archivado == false}">$ <span
+						th:text="${#numbers.formatDecimal(reg.impAplicado, 0, 'POINT', 2, 'COMMA')}"></span></td>
+					<td th:if="${reg.archivado == false}">$ <span
+						th:text="${#numbers.formatDecimal(reg.saldo, 0, 'POINT', 2, 'COMMA')}"></span></td>
+					<td th:if="${reg.archivado == false}"
+						class="bg-light font-weight-bold"
+						th:text="${#dates.format(reg.fechacomment, 'dd-MMM-yyyy')}"></td>
+					<td th:if="${reg.archivado == false}"
+						class="bg-light font-weight-bold" th:text="${reg.userComment}"></td>
+					<td th:if="${reg.archivado == false}"
+						class="text-left bg-light font-weight-bold"
+						th:text="${reg.comment}"></td>
+					<!-- <td th:if="${reg.archivado == false}" th:text="${reg.archivado}"></td> -->
+					<td class="bg-light" th:if="${reg.archivado == false}"><a title="Archivar.."
+						class="btn btn-outline-danger" th:href="@{/comments/archivar/} + ${reg.id}"><i class="fas fa-archive"></i></a></td>
+				</tr>
+
+			</tbody>
+		</table>
+
+	</div>
+
+
+
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+<script type="text/javascript">function showhideArch() {
+	var x = document.getElementById("activos");
+	if (x.style.display === "none") {
+		x.style.display = "block";
+	} else {
+		x.style.display = "none";
+	}
+}
+
+function showhideAct() {
+	var x = document.getElementById("archivados");
+	if (x.style.display === "none") {
+		x.style.display = "block";
+	} else {
+		x.style.display = "none";
+	}
+}</script>
+</html>

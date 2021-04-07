@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+	<div class="container py-4"></div>
+	<div class="card bg-light">
+		<div class="card-header" th:text="${titulo}" />
+
+		<div class="card-body animated fadeIn fast">
+			
+			<a th:if="${ username == 'Herrero' OR username == 'Admin' }" th:href="@{/deleteall}" title="Eliminar todos los registros.."
+			onclick="return confirm('Estas seguro que quieres eliminar?');"><button class=" btn btn-danger"><i class="fas fa-trash"></i></button></a>
+			<br/>
+			
+			<table class="table table-striped table-bordered table-responsive table-sm animated fadeIn fast"
+				style="width: 100%">
+				<thead>
+					<tr>
+						<th>Nombre de Cliente</th>
+						<th>ID Cliente en TripleH</th>
+						<th>ID de Empresa</th>
+						<th>Nombre empresa</th>
+						<th>Id Vendedor</th>
+						<th>Vendedor</th>
+						<th>Factura</th>
+						<th>Saldo</th>
+						<th>Importe Factura</th>
+						<th>Importe aplicado</th>
+						<th>Fecha Factura</th>
+						<th>recAplicacion</th>
+						<th>T.C.</th>
+						<th>Fecha listado</th>
+						<th>Localidad</th>
+						<th>Zona</th>
+
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="registro: ${listado}">
+						<td th:text="${registro.clienteNombre}"></td>
+						<td th:text="${registro.idClienteGalassi}"></td>
+						<td th:text="${registro.idEmpresa}"></td>
+						<td th:text="${registro.nombreEmpresa}"></td>
+						<td th:text="${registro.nroVendedor}"></td>
+						<td th:text="${registro.vendedor}"></td>
+						<td th:text="${registro.factura}"></td>
+						<td>$ <span th:text="${#numbers.formatDecimal(registro.saldo, 0, 'POINT', 2, 'COMMA')}"></span></td>
+						<td>$ <span th:text="${#numbers.formatDecimal(registro.impFactura, 0, 'POINT', 2, 'COMMA')}"></span></td>
+						<td>$ <span th:text="${#numbers.formatDecimal(registro.impAplicado, 0, 'POINT', 2, 'COMMA')}"></span></td>
+						<td th:text="${#dates.format(registro.fechaFactura, 'dd-MMM-yyyy')}"></td>
+						<td th:text="${registro.recAplicacion}"></td>
+						<td th:text="${registro.tipoComprobante }"></td>
+						<td th:text="${#dates.format(registro.fechaListado, 'dd-MMM-yyyy')}"></td>
+						<td th:text="${registro.localidad}"></td>
+						<td th:text="${registro.zona}"></td>
+
+					</tr>
+				</tbody>
+			</table>
+			<nav th:replace="views/paginator-nav :: paginator"></nav>
+		</div>
+	</div>
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>
